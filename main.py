@@ -1,4 +1,5 @@
 import glob
+import os
 
 import kaa
 
@@ -11,11 +12,17 @@ for f in files:
     with open(f, "r") as file:
         title = f[6:-4] # Cut crap out of file name
         raw = file.read()
-        songs[title] = kaa.core.make_chordblocks(raw)
+        songs[title] = kaa.make_chordblocks(raw, buffer=True)
 
-# Make songbook HTML book
-book = kaa.html.make_book(songs)
+templates = ["template.html"]
 
-# Save generated songbook page as an HTML file
-with open("index.html", "w") as file:
-    file.write(book)
+for template in templates:
+    _, extension = os.path.splitext(template)
+
+    # Make songbook HTML book
+    title = "Take on Me, Twice"
+    html_book = kaa.make_book(songs, title, template)
+    
+    # Save generated songbook page as an HTML file
+    with open("{0}{1}".format(title.lower().replace(' ', '_'), extension), "w") as file:
+        file.write(html_book)
