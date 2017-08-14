@@ -1,11 +1,11 @@
 from jinja2 import Template
 import os
 
-print("Core functions imported")
 
 # Function to replace a particular index within a string
 def replace_str_index(text,index=0,replacement=''):
     return '%s%s%s'%(text[:index],replacement,text[index+1:])
+
 
 # Function to create  an array of "chordblocks" from a raw songfile string
 """
@@ -19,7 +19,6 @@ def make_chordblocks(raw, buffer = False):
 
     lines = [[ s.split(']') for s in l.split('[')] for l in ly_lst] # Split each line into an array of chord blocks
     
-    
     for line in lines:
         #Handle first cells (makes all first cells the same length, even if data is missing)
         if len(line[0]) is not 0:
@@ -27,14 +26,15 @@ def make_chordblocks(raw, buffer = False):
         
         # Pad out chords that fall off-syllable
         if buffer:
-            for block in line:
-                try:
-                    if block[1][0] == " ":
-                        block[1] = replace_str_index(block[1],index=0,replacement='\t')
+            for block in line: # For each syllable block
+                try: # If zeroth character exists
+                    if block[1][0] == " ": # If zeroth character is a space
+                        block[1] = replace_str_index(block[1],index=0,replacement='\t') # Replace with a tab
                 except:
-                    print("No block data. Passing.")
+                    pass
     
     return lines
+
 
 # Function to create an HTML "book" of all song files in a properly formatted dictionary
 def make_book(dictionary, title, template):
