@@ -41,7 +41,7 @@ def make_book(dictionary, title, template):
     template_path = os.path.join("templates", template)
     
     with open(template_path, "r") as template_file:
-        model = Template(template_file.read())
+        model = Template(template_file.read(), trim_blocks=True)
         page = model.render(dictionary=dictionary, title=title)
                              
     return page

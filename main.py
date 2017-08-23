@@ -7,7 +7,7 @@ import kaa
 books = ['Take on Me, Twice']
 
 # List of template files to use
-templates = ["template.html"]
+templates = ["template.tex", "template.html"]
 
 
 # For each book to be generated

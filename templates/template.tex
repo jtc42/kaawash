@@ -1,0 +1,43 @@
+{% raw %}
+\documentclass[
+25pt,
+a4paper,
+%landscape,
+]{extarticle}
+
+\newcommand\chord[2][l]{%
+  \makebox[0pt][#1]{\begin{tabular}[b]{@{}l@{}}#2\\\mbox{} \end{ tabular } } }
+
+\title{}
+
+{% endraw %}
+
+\begin{document} 
+
+\maketitle
+\newpage
+
+\tableofcontents 
+\newpage 
+
+{% for name, chordblock in dictionary.items() %}
+\Large{
+{# For each song in the dictionary #}
+\section{ {{name.split("_")[1]}}  {\it {{name.split("_")[0]}} }  \Large}
+
+
+{% for line in chordblock %}
+{% for pos in line %}
+\chord{ {{pos[0]}} } {{pos[1]}}
+{% endfor %}
+{% endfor %}
+
+\newpage
+{% endfor %}
+
+}
+
+\end{document}
+
+
+ 
