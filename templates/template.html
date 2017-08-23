@@ -1,5 +1,13 @@
 <html>
     <style>
+		h2 {
+		    margin: 20px 0 0 0;
+		}
+		
+		h3 {
+		    margin: 0 0 20px 0;
+		}
+	
         table { 
             text-align: left;
             border-spacing: 0;
@@ -17,7 +25,8 @@
 
     {# For each song in the dictionary #}
     {% for name, chordblock in dictionary.items() %}
-    <h2>{{name}}</h2>
+    <h2>{{ name.split("_")[1] }}</h2>
+    <h3>{{ name.split("_")[0] }}</h3>
         
         {# For each line of the song #}
         {% for line in chordblock %}
