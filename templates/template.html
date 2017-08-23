@@ -1,0 +1,56 @@
+<html>
+    <style>
+		h2 {
+		    margin: 20px 0 0 0;
+		}
+		
+		h3 {
+		    margin: 0 0 20px 0;
+		}
+	
+        table { 
+            text-align: left;
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+		
+        td{
+            padding:0; margin:0;
+            white-space:PRE;
+        }
+    </style>
+    
+    <h1> {{ title }}</h1>
+
+    {# For each song in the dictionary #}
+    {% for name, chordblock in dictionary.items() %}
+    <h2>{{ name.split("_")[1] }}</h2>
+    <h3>{{ name.split("_")[0] }}</h3>
+        
+        {# For each line of the song #}
+        {% for line in chordblock %}
+        <table>
+        
+            {# For chord cell and lyric cell positions #}
+            {% for i in range(2) %}
+            <tr>
+            
+                {# For each syllable in the line #}
+                {% for pos in line %}
+                    
+                    {# Add chord (i=0) or lyric (i=1) #}
+                    <td>{{ pos[i] }}</td>
+                         
+                {% endfor %}
+        
+            </tr>
+            {% endfor %}
+        
+        </table>
+        {% endfor %}
+        
+    {% endfor %}
+    
+
+</html>
